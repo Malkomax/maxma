@@ -1,3 +1,4 @@
+#! ./sipsenv/bin/python
 '''This is the main runner code for the SipsVs bot.'''
 import os
 import random
