@@ -40,16 +40,16 @@ async def on_message(message):
     '''Describes behavior on message receive'''
     if message.author == client.user:
         return
-    if message.content.startswith('>_> sipsvs'):
-        opponent = str.strip(message.content[len('>_> sipsvs'):])
-        fight = combat(opponent)
-        await message.channel.send(fight)
-    if message.content.startswith('>_> help'):
-        await message.channel.send('Hey, thanks for asking for help! \n' +
-        'Use ```css\n>_> sipsvs [opponent]\n``` to generate a battle!')
-    if message.content.startswith('>_> hello'):
-        # print(f'Message received from {message.author}!')
-        await message.channel.send('Hello!')
+    if message.content.startswith('sipsvs'):
+        arg = str.strip(message.content[len('sipsvs'):])
+        if len(arg) == 0 or arg == 'help':
+            await message.channel.send('Hey, thanks for asking for help! \n' +
+            'Use ```css\nsipsvs [opponent]\n``` to generate a battle!')
+        else:
+            opponent = str.strip(message.content[len('sipsvs'):])
+            fight = combat(opponent)
+            await message.channel.send(fight)
+
 
 env_setup()
 client.run(os.getenv('TOKEN'))
