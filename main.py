@@ -18,9 +18,9 @@ def combat(opponent:str) -> str:
     sips_roll = random.randint(1, 20)
     opponent_roll = random.randint(1, 20)
     roll_string = f'Sips rolled a {sips_roll}, while {opponent} rolled a {opponent_roll}!'
-    if (opponent_roll > sips_roll): #Opponent wins
+    if opponent_roll > sips_roll: #Opponent wins
         result = f'Sips has been vanquished by {opponent}.'
-    elif (sips_roll > opponent_roll): #Sips wins
+    elif sips_roll > opponent_roll: #Sips wins
         result = f'Sips has ANNIHILATED {opponent}!'
     else: # Tie
         result = f'Alas, it was a stalemate. Neither Sips nor {opponent} could best the other.'
@@ -40,15 +40,13 @@ async def on_message(message):
     '''Describes behavior on message receive'''
     if message.author == client.user:
         return
-    
     if message.content.startswith('>_> sipsvs'):
         opponent = str.strip(message.content[len('>_> sipsvs'):])
         fight = combat(opponent)
         await message.channel.send(fight)
-
     if message.content.startswith('>_> help'):
-        await message.channel.send('Hey, thanks for asking for help!\nUse `>_> sipsvs opponent` to generate a battle!')
-
+        await message.channel.send('Hey, thanks for asking for help! \n' +
+        'Use ```css\n>_> sipsvs [opponent]\n``` to generate a battle!')
     if message.content.startswith('>_> hello'):
         # print(f'Message received from {message.author}!')
         await message.channel.send('Hello!')
