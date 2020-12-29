@@ -27,30 +27,28 @@ def combat(opponent:str) -> str:
         result = f'Alas, it was a stalemate. Neither Sips nor {opponent} could best the other.'
     return f'{roll_string} {result}'
 
-client = discord.Client()
+if __name__ == "__main__":
+    client = discord.Client()
 
+    @client.event
+    async def on_ready():
+        '''On first event, set up client'''
+        print(f'We have logged in as {client.user}')
 
-@client.event
-async def on_ready():
-    '''On first event, set up client'''
-    print(f'We have logged in as {client.user}')
+    @client.event
+    async def on_message(message):
+        '''Describes behavior on message receive'''
+        if message.author == client.user:
+            return
+        if message.content.startswith('sipsvs'):
+            arg = str.strip(message.content[len('sipsvs'):])
+            if len(arg) == 0 or arg == 'help':
+                await message.channel.send('Hey, thanks for asking for help! \n' +
+                'Use ```css\nsipsvs [opponent]\n``` to generate a battle!')
+            else:
+                opponent = str.strip(message.content[len('sipsvs'):])
+                fight = combat(opponent)
+                await message.channel.send(fight)
 
-
-@client.event
-async def on_message(message):
-    '''Describes behavior on message receive'''
-    if message.author == client.user:
-        return
-    if message.content.startswith('sipsvs'):
-        arg = str.strip(message.content[len('sipsvs'):])
-        if len(arg) == 0 or arg == 'help':
-            await message.channel.send('Hey, thanks for asking for help! \n' +
-            'Use ```css\nsipsvs [opponent]\n``` to generate a battle!')
-        else:
-            opponent = str.strip(message.content[len('sipsvs'):])
-            fight = combat(opponent)
-            await message.channel.send(fight)
-
-
-env_setup()
-client.run(os.getenv('TOKEN'))
+    env_setup()
+    client.run(os.getenv('TOKEN'))
