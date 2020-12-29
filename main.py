@@ -1,23 +1,25 @@
-import discord
+'''This is the main runner code for the SipsVs bot.'''
 import os
+
+import discord
 from dotenv import load_dotenv
 
-'''
-This is a slightly hacky way to get the environment token to load correctly
-If I don't do this step, the token won't show up.
-'''
 working_directory = os.getcwd()
 add_to_env = os.path.join(working_directory, '.env')
 load_dotenv(add_to_env)
 
 client = discord.Client()
 
+
 @client.event
 async def on_ready():
+    '''On first event, set up client'''
     print(f'We have logged in as {client.user}')
+
 
 @client.event
 async def on_message(message):
+    '''Describes behavior on message receive'''
     if message.author == client.user:
         return
 
