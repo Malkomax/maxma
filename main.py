@@ -28,17 +28,23 @@ def combat(opponent:str) -> str:
     return f'{roll_string} {result}'
 
 def command_processor(argument:str) -> str:
+    '''
+    This function determines the behavior of the sipsvs bot after the sipsvs keyword.
+    '''
     if len(argument) == 0 or argument == 'help':
-        return 'Hey, thanks for asking for help!\nTo make it clear your homies hate someone, use ```css\nsipsvs fuck [name]```\nTo shame someone, use ```css\nsipsvs shame [name]```\nTo generate a battle, use ```css\nsipsvs [opponent]```'
+        return str('Hey, thanks for asking for help!\n' +
+        'To make it clear your homies hate someone, use ```css\nsipsvs fuck [name]```\n' +
+        'To shame someone, use ```css\nsipsvs shame [name]```\n' +
+        'To generate a battle, use ```css\nsipsvs [opponent]```')
     if argument.startswith('shame'):
         arg = str.strip(argument[len('shame'):])
         return f'SHAME UPON {arg}'
-    elif argument.startswith('fuck'):
+    if argument.startswith('fuck'):
         arg = str.strip(argument[len('fuck'):])
         return f'fuck {arg} all my homies hate {arg}'
-    else:
-        fight = combat(argument)
-        return fight
+    # No other option here
+    fight = combat(argument)
+    return fight
 
 if __name__ == "__main__":
     client = discord.Client()
@@ -46,7 +52,8 @@ if __name__ == "__main__":
     @client.event
     async def on_ready():
         '''On first event, set up client'''
-        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='the command sipsvs'))
+        await client.change_presence(activity=discord.Activity(
+            type=discord.ActivityType.listening, name='the command sipsvs'))
         print(f'We have logged in as {client.user}')
 
     @client.event
