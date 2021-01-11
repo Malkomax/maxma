@@ -27,6 +27,19 @@ def combat(opponent:str) -> str:
         result = f'Alas, it was a stalemate. Neither Sips nor {opponent} could best the other.'
     return f'{roll_string} {result}'
 
+def command_processor(argument:str) -> str:
+    if len(argument) == 0 or argument == 'help':
+        return 'Hey, thanks for asking for help!\nTo make it clear your homies hate someone, use ```css\nsipsvs fuck [name]```\nTo shame someone, use ```css\nsipsvs shame [name]```\nTo generate a battle, use ```css\nsipsvs [opponent]```'
+    if argument.startswith('shame'):
+        arg = str.strip(argument[len('shame'):])
+        return f'SHAME UPON {arg}'
+    elif argument.startswith('fuck'):
+        arg = str.strip(argument[len('fuck'):])
+        return f'fuck {arg} all my homies hate {arg}'
+    else:
+        fight = combat(argument)
+        return fight
+
 if __name__ == "__main__":
     client = discord.Client()
 
@@ -42,13 +55,7 @@ if __name__ == "__main__":
             return
         if message.content.startswith('sipsvs'):
             arg = str.strip(message.content[len('sipsvs'):])
-            if len(arg) == 0 or arg == 'help':
-                await message.channel.send('Hey, thanks for asking for help! \n' +
-                'Use ```css\nsipsvs [opponent]\n``` to generate a battle!')
-            else:
-                opponent = str.strip(message.content[len('sipsvs'):])
-                fight = combat(opponent)
-                await message.channel.send(fight)
+            await message.channel.send(command_processor(arg))
 
     env_setup()
     client.run(os.getenv('TOKEN'))
