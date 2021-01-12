@@ -12,19 +12,20 @@ def env_setup():
     add_to_env = os.path.join(working_directory, '.env')
     load_dotenv(add_to_env)
 
-def combat(opponent:str) -> str:
+def combat(combatant_one:str, combatant_two:str) -> str:
     '''
-    This function takes the opponent's name and computes dice rolls for both Sips and the opponent.
+    This function takes both combatants and rolls dice for them both.
     '''
-    sips_roll = random.randint(1, 20)
-    opponent_roll = random.randint(1, 20)
-    roll_string = f'Sips rolled a {sips_roll}, while {opponent} rolled a {opponent_roll}!'
-    if opponent_roll > sips_roll: #Opponent wins
-        result = f'Sips has been vanquished by {opponent}.'
-    elif sips_roll > opponent_roll: #Sips wins
-        result = f'Sips has ANNIHILATED {opponent}!'
+    print(combatant_one, combatant_two)
+    c1_roll = random.randint(1, 20)
+    c2_roll = random.randint(1, 20)
+    roll_string = f'{combatant_one} rolled a {c1_roll}, while {combatant_two} rolled a {c2_roll}!'
+    if c2_roll > c1_roll: #c2 wins
+        result = f'{combatant_one} has been vanquished by {combatant_two}.'
+    elif c1_roll > c2_roll: #c1 wins
+        result = f'{combatant_one} has ANNIHILATED {combatant_two}!'
     else: # Tie
-        result = f'Alas, it was a stalemate. Neither Sips nor {opponent} could best the other.'
+        result = f'Alas, it was a stalemate. Neither could best the other.'
     return f'{roll_string} {result}'
 
 def command_processor(argument:str) -> str:
@@ -35,15 +36,20 @@ def command_processor(argument:str) -> str:
         return str('Hey, thanks for asking for help!\n' +
         'To make it clear your homies hate someone, use ```css\nsipsvs fuck [name]```\n' +
         'To shame someone, use ```css\nsipsvs shame [name]```\n' +
-        'To generate a battle, use ```css\nsipsvs [opponent]```')
+        'To cause a pvp battle, use ```css\nsipsvs pvp [combatant one] vs [combatant two]```\n' +
+        'To generate a battle against sips, use ```css\nsipsvs [opponent]```')
     if argument.startswith('shame'):
         arg = str.strip(argument[len('shame'):])
         return f'SHAME UPON {arg}'
     if argument.startswith('fuck'):
         arg = str.strip(argument[len('fuck'):])
         return f'fuck {arg} all my homies hate {arg}'
+    if argument.startswith('pvp'):
+        arg = str.strip(argument[len('pvp')])
+        combatants = arg.split(' vs ')
+        return combat(str.strip(combatants[0]), str.strip(combatants[1]))
     # No other option here
-    fight = combat(argument)
+    fight = combat('sips', argument)
     return fight
 
 if __name__ == "__main__":
