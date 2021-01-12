@@ -45,7 +45,7 @@ def command_processor(argument:str) -> str:
         arg = str.strip(argument[len('fuck'):])
         return f'fuck {arg} all my homies hate {arg}'
     if argument.startswith('pvp'):
-        arg = str.strip(argument[len('pvp')])
+        arg = str.strip(argument[len('pvp'):])
         combatants = arg.split(' vs ')
         return combat(str.strip(combatants[0]), str.strip(combatants[1]))
     # No other option here
