@@ -25,7 +25,7 @@ def combat(combatant_one:str, combatant_two:str) -> str:
     elif c1_roll > c2_roll: #c1 wins
         result = f'{combatant_one} has ANNIHILATED {combatant_two}!'
     else: # Tie
-        result = f'Alas, it was a stalemate. Neither could best the other.'
+        result = 'Alas, it was a stalemate. Neither could best the other.'
     return f'{roll_string} {result}'
 
 def command_processor(argument:str) -> str:
