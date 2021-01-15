@@ -33,7 +33,7 @@ def command_processor(argument:str) -> str:
     This function determines the behavior of the sipsvs bot after the sipsvs keyword.
     '''
     if len(argument) == 0 or argument == 'help':
-        return str('Hey, thanks for asking for help!\n' +
+        return str('Hey, thanks for asking for help!\n\n' +
         'To make it clear your homies hate someone, use ```css\nsipsvs fuck [name]```\n' +
         'To shame someone, use ```css\nsipsvs shame [name]```\n' +
         'To cause a pvp battle, use ```css\nsipsvs pvp [combatant one] vs [combatant two]```\n' +
