@@ -12,6 +12,9 @@ def env_setup():
     add_to_env = os.path.join(working_directory, '.env')
     load_dotenv(add_to_env)
 
+def hap_birt(arg: str) -> str:
+    return f'HAPPY BDAY, {arg}'
+
 def combat(combatant_one:str, combatant_two:str) -> str:
     '''
     This function takes both combatants and rolls dice for them both.
@@ -37,7 +40,8 @@ def command_processor(argument:str) -> str:
         'To make it clear your homies hate someone, use ```css\nsipsvs fuck [name]```\n' +
         'To shame someone, use ```css\nsipsvs shame [name]```\n' +
         'To cause a pvp battle, use ```css\nsipsvs pvp [combatant one] vs [combatant two]```\n' +
-        'To generate a battle against sips, use ```css\nsipsvs [opponent]```')
+        'To generate a battle against sips, use ```css\nsipsvs [opponent]```\n' + 
+        'To wish a friend a birthday, use ```css\nsipsvs hbd [name]```\n')
     if argument.startswith('shame'):
         arg = str.strip(argument[len('shame'):])
         return f'SHAME UPON {arg}'
@@ -48,6 +52,9 @@ def command_processor(argument:str) -> str:
         arg = str.strip(argument[len('pvp'):])
         combatants = arg.split(' vs ')
         return combat(str.strip(combatants[0]), str.strip(combatants[1]))
+    if argument.startswith('hbd'):
+        arg = str.strip(argument[len('hbd'):])
+        return hap_birt(arg)
     # No other option here
     fight = combat('sips', argument)
     return fight
@@ -59,7 +66,7 @@ if __name__ == "__main__":
     async def on_ready():
         '''On first event, set up client'''
         await client.change_presence(activity=discord.Activity(
-            type=discord.ActivityType.listening, name='the command sipsvs'))
+            type=discord.ActivityType.listening, name='sipsvs & Malcolm!'))
         print(f'We have logged in as {client.user}')
 
     @client.event
