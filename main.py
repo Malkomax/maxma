@@ -1,4 +1,4 @@
-#! /usr/bin/python3.8
+#! /home/ubuntu/sips-vs/sipsenv/bin/python3
 '''This is the main runner code for the SipsVs bot.'''
 import os
 import random
@@ -18,7 +18,7 @@ def env_setup():
 async def respectfully(arg: str) -> str:
     '''adds respect. respectfully.'''
     await asyncio.sleep(10)
-    return (f'{arg}. respectfully.')
+    return f'{arg}. respectfully.'
 
 
 async def hap_birt(arg: str) -> str:
@@ -74,8 +74,7 @@ async def command_processor(argument: str) -> str:
         arg = str.strip(argument[len('respectfully'):])
         return await respectfully(arg)
     # No other option here
-    fight = await combat('sips', argument)
-    return fight
+    return await combat('sips', argument)
 
 
 if __name__ == "__main__":
