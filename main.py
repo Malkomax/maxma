@@ -73,8 +73,7 @@ async def command_processor(argument: str) -> str:
     if argument.startswith('respectfully'):
         arg = str.strip(argument[len('respectfully'):])
         return await respectfully(arg)
-    else:
-        return await combat('sips', argument)
+    return await combat('sips', argument)
 
 
 if __name__ == "__main__":
