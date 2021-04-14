@@ -45,7 +45,7 @@ async def combat(combatant_one: str, combatant_two: str) -> str:
     return f'{roll_string} {result}'
 
 
-def command_processor(argument:str) -> str:
+async def command_processor(argument: str) -> str:
     '''
     This function determines the behavior of the sipsvs bot after the sipsvs keyword.
     '''
@@ -55,7 +55,7 @@ def command_processor(argument:str) -> str:
         'To shame someone, use ```css\nsipsvs shame [name]```\n' +
         'To cause a pvp battle, use ```css\nsipsvs pvp [combatant one] vs [combatant two]```\n' +
         'To generate a battle against sips, use ```css\nsipsvs [opponent]```\n' +
-        'To wish a friend a birthday, use ```css\nsipsvs hbd [name]```\n' + 
+        'To wish a friend a birthday, use ```css\nsipsvs hbd [name]```\n' +
         'To provide additional respect, use ```css\nsipsvs respectfully [text]```\n')
     if argument.startswith('shame'):
         arg = str.strip(argument[len('shame'):])
@@ -66,15 +66,15 @@ def command_processor(argument:str) -> str:
     if argument.startswith('pvp'):
         arg = str.strip(argument[len('pvp'):])
         combatants = arg.split(' vs ')
-        return asyncio.run(combat(str.strip(combatants[0]), str.strip(combatants[1])))
+        return await combat(str.strip(combatants[0]), str.strip(combatants[1]))
     if argument.startswith('hbd'):
         arg = str.strip(argument[len('hbd'):])
-        return asyncio.run(hap_birt(arg))
+        return await hap_birt(arg)
     if argument.startswith('respectfully'):
         arg = str.strip(argument[len('respectfully'):])
-        return asyncio.run(respectfully(arg))
+        return await respectfully(arg)
     # No other option here
-    fight = combat('sips', argument)
+    fight = await combat('sips', argument)
     return fight
 
 
@@ -95,7 +95,8 @@ if __name__ == "__main__":
             return
         if message.content.startswith('sipsvs'):
             arg = str.strip(message.content[len('sipsvs'):])
-            await message.channel.send(command_processor(arg))
+            result = await command_processor(arg)
+            await message.channel.send(result)
 
     env_setup()
     client.run(os.getenv('TOKEN'))
