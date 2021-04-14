@@ -1,7 +1,8 @@
-#! /usr/bin/python3
+#! /usr/bin/python3.8
 '''This is the main runner code for the SipsVs bot.'''
 import os
 import random
+import asyncio
 
 import discord
 from dotenv import load_dotenv
@@ -14,11 +15,20 @@ def env_setup():
     load_dotenv(add_to_env)
 
 
-def hap_birt(arg: str) -> str:
+async def respectfully(arg: str) -> str:
+    '''adds respect. respectfully.'''
+    await asyncio.sleep(10)
+    return (f'{arg}. respectfully.')
+
+
+async def hap_birt(arg: str) -> str:
+    '''
+    Sends a happy birthday message!
+    '''
     return f'HAPPY BDAY, {arg}'
 
 
-def combat(combatant_one: str, combatant_two: str) -> str:
+async def combat(combatant_one: str, combatant_two: str) -> str:
     '''
     This function takes both combatants and rolls dice for them both.
     '''
@@ -45,7 +55,8 @@ def command_processor(argument:str) -> str:
         'To shame someone, use ```css\nsipsvs shame [name]```\n' +
         'To cause a pvp battle, use ```css\nsipsvs pvp [combatant one] vs [combatant two]```\n' +
         'To generate a battle against sips, use ```css\nsipsvs [opponent]```\n' +
-        'To wish a friend a birthday, use ```css\nsipsvs hbd [name]```\n')
+        'To wish a friend a birthday, use ```css\nsipsvs hbd [name]```\n' + 
+        'To provide additional respect, use ```css\nsipsvs respectfully [text]```\n')
     if argument.startswith('shame'):
         arg = str.strip(argument[len('shame'):])
         return f'SHAME UPON {arg}'
@@ -55,10 +66,13 @@ def command_processor(argument:str) -> str:
     if argument.startswith('pvp'):
         arg = str.strip(argument[len('pvp'):])
         combatants = arg.split(' vs ')
-        return combat(str.strip(combatants[0]), str.strip(combatants[1]))
+        return asyncio.run(combat(str.strip(combatants[0]), str.strip(combatants[1])))
     if argument.startswith('hbd'):
         arg = str.strip(argument[len('hbd'):])
-        return hap_birt(arg)
+        return asyncio.run(hap_birt(arg))
+    if argument.startswith('respectfully'):
+        arg = str.strip(argument[len('respectfully'):])
+        return asyncio.run(respectfully(arg))
     # No other option here
     fight = combat('sips', argument)
     return fight
