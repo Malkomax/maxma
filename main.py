@@ -6,16 +6,19 @@ import random
 import discord
 from dotenv import load_dotenv
 
+
 def env_setup():
     '''Adds the .env variables so that tokens work'''
     working_directory = os.getcwd()
     add_to_env = os.path.join(working_directory, '.env')
     load_dotenv(add_to_env)
 
+
 def hap_birt(arg: str) -> str:
     return f'HAPPY BDAY, {arg}'
 
-def combat(combatant_one:str, combatant_two:str) -> str:
+
+def combat(combatant_one: str, combatant_two: str) -> str:
     '''
     This function takes both combatants and rolls dice for them both.
     '''
@@ -23,13 +26,14 @@ def combat(combatant_one:str, combatant_two:str) -> str:
     c1_roll = random.randint(1, 20)
     c2_roll = random.randint(1, 20)
     roll_string = f'{combatant_one} rolled a {c1_roll}, while {combatant_two} rolled a {c2_roll}!'
-    if c2_roll > c1_roll: #c2 wins
+    if c2_roll > c1_roll:  # c2 wins
         result = f'{combatant_one} has been vanquished by {combatant_two}.'
-    elif c1_roll > c2_roll: #c1 wins
+    elif c1_roll > c2_roll:  # c1 wins
         result = f'{combatant_one} has ANNIHILATED {combatant_two}!'
-    else: # Tie
+    else:  # Tie
         result = 'Alas, it was a stalemate. Neither could best the other.'
     return f'{roll_string} {result}'
+
 
 def command_processor(argument:str) -> str:
     '''
@@ -40,7 +44,7 @@ def command_processor(argument:str) -> str:
         'To make it clear your homies hate someone, use ```css\nsipsvs fuck [name]```\n' +
         'To shame someone, use ```css\nsipsvs shame [name]```\n' +
         'To cause a pvp battle, use ```css\nsipsvs pvp [combatant one] vs [combatant two]```\n' +
-        'To generate a battle against sips, use ```css\nsipsvs [opponent]```\n' + 
+        'To generate a battle against sips, use ```css\nsipsvs [opponent]```\n' +
         'To wish a friend a birthday, use ```css\nsipsvs hbd [name]```\n')
     if argument.startswith('shame'):
         arg = str.strip(argument[len('shame'):])
@@ -58,6 +62,7 @@ def command_processor(argument:str) -> str:
     # No other option here
     fight = combat('sips', argument)
     return fight
+
 
 if __name__ == "__main__":
     client = discord.Client()
