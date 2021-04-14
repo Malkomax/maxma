@@ -17,7 +17,7 @@ def env_setup():
 
 async def respectfully(arg: str) -> str:
     '''adds respect. respectfully.'''
-    await asyncio.sleep(10)
+    await asyncio.sleep(7)
     return f'{arg}. respectfully.'
 
 
