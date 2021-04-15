@@ -92,7 +92,7 @@ if __name__ == "__main__":
     async def on_ready():
         '''On first event, set up client'''
         await client.change_presence(activity=discord.Activity(
-            type=discord.ActivityType.listening, name='sipsvs'))
+            type=discord.ActivityType.listening, name='sipsvs. Now linted!'))
         print(f'We have logged in as {client.user}')
 
     @client.event
