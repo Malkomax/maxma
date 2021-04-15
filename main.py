@@ -35,7 +35,7 @@ async def combat(combatant_one: str, combatant_two: str) -> str:
     print(combatant_one, combatant_two)
     c1_roll = random.randint(1, 20)
     c2_roll = random.randint(1, 20)
-    roll_string = (f'{combatant_one} rolled a' +
+    roll_string = (f'{combatant_one} rolled a ' +
                    f'{c1_roll}, while {combatant_two} rolled a {c2_roll}!')
     if c2_roll > c1_roll:  # c2 wins
         result = f'{combatant_one} has been vanquished by {combatant_two}.'
