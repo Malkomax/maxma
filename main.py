@@ -95,6 +95,8 @@ if __name__ == "__main__":
             arg = str.strip(message.content[len('sipsvs'):])
             result = await command_processor(arg)
             await message.channel.send(result)
+        elif 'respectfully' in message.content:
+            await message.add_reaction('🕶')
 
     env_setup()
     client.run(os.getenv('TOKEN'))
