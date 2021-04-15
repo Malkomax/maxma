@@ -35,7 +35,8 @@ async def combat(combatant_one: str, combatant_two: str) -> str:
     print(combatant_one, combatant_two)
     c1_roll = random.randint(1, 20)
     c2_roll = random.randint(1, 20)
-    roll_string = f'{combatant_one} rolled a {c1_roll}, while {combatant_two} rolled a {c2_roll}!'
+    roll_string = (f'{combatant_one} rolled a' +
+                   f'{c1_roll}, while {combatant_two} rolled a {c2_roll}!')
     if c2_roll > c1_roll:  # c2 wins
         result = f'{combatant_one} has been vanquished by {combatant_two}.'
     elif c1_roll > c2_roll:  # c1 wins
@@ -47,16 +48,24 @@ async def combat(combatant_one: str, combatant_two: str) -> str:
 
 async def command_processor(argument: str) -> str:
     '''
-    This function determines the behavior of the sipsvs bot after the sipsvs keyword.
+    This function determines
+    the behavior of the sipsvs bot after the sipsvs keyword.
     '''
     if len(argument) == 0 or argument == 'help':
         return str('Hey, thanks for asking for help!\n\n' +
-        'To make it clear your homies hate someone, use ```css\nsipsvs fuck [name]```\n' +
-        'To shame someone, use ```css\nsipsvs shame [name]```\n' +
-        'To cause a pvp battle, use ```css\nsipsvs pvp [combatant one] vs [combatant two]```\n' +
-        'To generate a battle against sips, use ```css\nsipsvs [opponent]```\n' +
-        'To wish a friend a birthday, use ```css\nsipsvs hbd [name]```\n' +
-        'To provide additional respect, use ```css\nsipsvs respectfully [text]```\n')
+                   'To make it clear your homies hate someone, use ' +
+                   '```css\nsipsvs fuck [name]```\n' +
+                   'To shame someone, use ' +
+                   '```css\nsipsvs shame [name]```\n' +
+                   'To cause a pvp battle, use ' +
+                   '```css\nsipsvs pvp [combatant one] ' +
+                   'vs [combatant two]```\n' +
+                   'To generate a battle against sips, use ' +
+                   '```css\nsipsvs [opponent]```\n' +
+                   'To wish a friend a birthday, use ' +
+                   '```css\nsipsvs hbd [name]```\n' +
+                   'To provide additional respect, use ' +
+                   '```css\nsipsvs respectfully [text]```\n')
     if argument.startswith('shame'):
         arg = str.strip(argument[len('shame'):])
         return f'SHAME UPON {arg}'
@@ -83,7 +92,7 @@ if __name__ == "__main__":
     async def on_ready():
         '''On first event, set up client'''
         await client.change_presence(activity=discord.Activity(
-            type=discord.ActivityType.listening, name='sipsvs & Malcolm!'))
+            type=discord.ActivityType.listening, name='sipsvs'))
         print(f'We have logged in as {client.user}')
 
     @client.event
