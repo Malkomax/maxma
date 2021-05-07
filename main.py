@@ -1,10 +1,12 @@
 #! /home/ubuntu/sips-vs/sipsenv/bin/python3
 '''This is the main runner code for the SipsVs bot.'''
 import os
-import command_runner
+import re
 
 import discord
 from dotenv import load_dotenv
+
+import command_runner
 
 
 def env_setup():
@@ -17,6 +19,9 @@ def env_setup():
 if __name__ == "__main__":
     client = discord.Client()
 
+    daBabySpaceBlocker = re.compile('da[\\w\\s]+baby', re.IGNORECASE)
+    daBabyNoSpaceBlocker = re.compile('dababy', flags=re.IGNORECASE)
+
     @client.event
     async def on_ready():
         '''On first event, set up client'''
@@ -26,6 +31,9 @@ if __name__ == "__main__":
 
     @client.event
     async def on_message(message):
+        daBabyDenier = [daBabyNoSpaceBlocker.search(message.content),
+                        daBabySpaceBlocker.search(message.content)]
+        # print(daBabyDenier)
         '''Describes behavior on message receive'''
         if message.author == client.user:
             return
@@ -43,6 +51,8 @@ if __name__ == "__main__":
                 await message.channel.send(result)
         elif 'respectfully' in message.content:
             await message.add_reaction('🕶')
+        elif daBabyDenier[0] is not None or daBabyDenier[1] is not None:
+            await message.add_reaction('👎🏽')
 
     env_setup()
     client.run(os.getenv('TOKEN'))
