@@ -24,9 +24,10 @@ if __name__ == "__main__":
     # client = discord.Client(intents=discord.Intents.all())
     # slash = SlashCommand(client, sync_commands=True)
 
-    daBabyRegex = 'd(\\s+)?[ax@4]([\\w\\s]+)?b(\\s+)?[ax@4](\\s+)?b(\\s+)?y'
+    daBRe = '[d(|\\))(\\s+)?[ax@4]([\\w\\s]+)?b(\\s+)?[ax@4](\\s+)?b(\\s+)?y'
+    # daBabyRegex; flake8 complained
 
-    daBabyBlocker = re.compile(daBabyRegex, re.IGNORECASE)
+    daBabyBlocker = re.compile(daBRe, re.IGNORECASE)
 
     @client.event
     async def on_ready():
