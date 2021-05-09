@@ -4,9 +4,12 @@ import os
 import re
 
 import discord
+# from discord_slash import SlashCommand
 from dotenv import load_dotenv
 
 import command_runner
+
+guild_ids = ['698755318792060929']
 
 
 def env_setup():
@@ -18,9 +21,12 @@ def env_setup():
 
 if __name__ == "__main__":
     client = discord.Client()
+    # client = discord.Client(intents=discord.Intents.all())
+    # slash = SlashCommand(client, sync_commands=True)
 
-    daBabySpaceBlocker = re.compile('da[\\w\\s]+baby', re.IGNORECASE)
-    daBabyNoSpaceBlocker = re.compile('dababy', flags=re.IGNORECASE)
+    daBabyRegex = 'd(\\s+)?[ax@4]([\\w\\s]+)?b(\\s+)?[ax@4](\\s+)?b(\\s+)?y'
+
+    daBabyBlocker = re.compile(daBabyRegex, re.IGNORECASE)
 
     @client.event
     async def on_ready():
@@ -31,9 +37,7 @@ if __name__ == "__main__":
 
     @client.event
     async def on_message(message):
-        daBabyDenier = [daBabyNoSpaceBlocker.search(message.content),
-                        daBabySpaceBlocker.search(message.content)]
-        # print(daBabyDenier)
+        daBabyDenier = daBabyBlocker.search(message.content)
         '''Describes behavior on message receive'''
         if message.author == client.user:
             return
@@ -46,12 +50,14 @@ if __name__ == "__main__":
             #         is_admin = True
             if arg.startswith('admin') and is_admin:
                 await message.channel.send('admin input recognized')
+            #     target = arg[len('admin '):]
+            #     result = admin_controls.command_processor(target)
             else:
                 result = await command_runner.command_processor(arg)
                 await message.channel.send(result)
         elif 'respectfully' in message.content:
             await message.add_reaction('🕶')
-        elif daBabyDenier[0] is not None or daBabyDenier[1] is not None:
+        elif daBabyDenier is not None:
             await message.add_reaction('👎🏽')
 
     env_setup()
