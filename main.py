@@ -25,6 +25,8 @@ if __name__ == "__main__":
     # slash = SlashCommand(client, sync_commands=True)
 
     daBRe = 'd(|\\))(\\s+)?[ax@4]([\\w\\s]+)?b(\\s+)?[ax@4](\\s+)?b(\\s+)?y'
+    # d (any whitespace) a/x/@/4 (whitespace/character) -? b a b y
+    # (same whitespace stuff, not sure why (|\\) is present)
 
     # daBabyRegex; flake8 complained
 
