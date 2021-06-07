@@ -24,7 +24,8 @@ if __name__ == "__main__":
     # client = discord.Client(intents=discord.Intents.all())
     # slash = SlashCommand(client, sync_commands=True)
 
-    daBRe = '[d(|\\))(\\s+)?[ax@4]([\\w\\s]+)?b(\\s+)?[ax@4](\\s+)?b(\\s+)?y'
+    daBRe = 'd(|\\))(\\s+)?[ax@4]([\\w\\s]+)?b(\\s+)?[ax@4](\\s+)?b(\\s+)?y'
+
     # daBabyRegex; flake8 complained
 
     daBabyBlocker = re.compile(daBRe, re.IGNORECASE)
