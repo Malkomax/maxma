@@ -1,6 +1,8 @@
 #! /home/ubuntu/sips-vs/sipsenv/bin/python3
 '''This is the main runner code for the SipsVs bot.'''
+import asyncio
 import os
+import random
 import re
 
 import discord
@@ -36,7 +38,7 @@ if __name__ == "__main__":
     async def on_ready():
         '''On first event, set up client'''
         await client.change_presence(activity=discord.Activity(
-            type=discord.ActivityType.listening, name='sipsvs in dev'))
+            type=discord.ActivityType.listening, name='sipsvs, respectfully'))
         print(f'We have logged in as {client.user}')
 
     @client.event
@@ -53,13 +55,16 @@ if __name__ == "__main__":
             #     if role.id == 701965615866576937:
             #         is_admin = True
             if arg.startswith('admin') and is_admin:
-                await message.channel.send('admin input recognized')
+                await message.reply('admin input recognized')
             #     target = arg[len('admin '):]
             #     result = admin_controls.command_processor(target)
             else:
                 result = await command_runner.command_processor(arg)
-                await message.channel.send(result)
+                await message.reply(result)
         elif 'respectfully' in message.content:
+            delay = random.randint(1, 19)
+            await asyncio.sleep(delay)
+            await message.reply('respectfully.')
             await message.add_reaction('🕶')
         elif daBabyDenier is not None:
             await message.add_reaction('👎🏽')
