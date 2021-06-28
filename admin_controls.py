@@ -7,7 +7,7 @@ async def command_processor(argument: str) -> str:
     the behavior of the sipsvs bot after the sipsvs keyword.
     '''
     return str('this is the admin input menu. ' +
-               f'Phrase {argument} received for admin.')
+               f'Phrase `{argument}` received for admin.')
     # return str('Hey, thanks for asking for help!\n\n' +
     #            'To make it clear your homies hate someone, use ' +
     #            '```css\nsipsvs fuck [name]```\n' +

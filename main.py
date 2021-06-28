@@ -57,9 +57,10 @@ if __name__ == "__main__":
                 if role.id == 701965615866576937:
                     is_admin = True
             if arg.startswith('admin') and is_admin:
-                await message.reply('admin input recognized')
+                # await message.reply('admin input recognized')
                 target = arg[len('admin '):]
-                result = admin_controls.command_processor(target)
+                result = await admin_controls.command_processor(target)
+                await message.reply(result)
             else:
                 result = await command_runner.command_processor(arg)
                 await message.reply(result)
