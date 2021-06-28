@@ -9,6 +9,7 @@ import discord
 # from discord_slash import SlashCommand
 from dotenv import load_dotenv
 
+import admin_controls
 import command_runner
 
 guild_ids = ['698755318792060929']
@@ -51,14 +52,14 @@ if __name__ == "__main__":
         if message.content.startswith('sipsvs'):
             arg = str.strip(message.content[len('sipsvs'):])
             is_admin = False  # Removed admin check to disable sipsvs admin
-            # admin_check = message.author.roles
-            # for role in admin_check:
-            #     if role.id == 701965615866576937:
-            #         is_admin = True
+            admin_check = message.author.roles
+            for role in admin_check:
+                if role.id == 701965615866576937:
+                    is_admin = True
             if arg.startswith('admin') and is_admin:
                 await message.reply('admin input recognized')
-            #     target = arg[len('admin '):]
-            #     result = admin_controls.command_processor(target)
+                target = arg[len('admin '):]
+                result = admin_controls.command_processor(target)
             else:
                 result = await command_runner.command_processor(arg)
                 await message.reply(result)
