@@ -38,7 +38,8 @@ if __name__ == "__main__":
     async def on_ready():
         '''On first event, set up client'''
         await client.change_presence(activity=discord.Activity(
-            type=discord.ActivityType.listening, name='sipsvs, respectfully'))
+            type=discord.ActivityType.listening,
+            name='sipsvs, less respectfully'))
         print(f'We have logged in as {client.user}')
 
     @client.event
@@ -64,7 +65,7 @@ if __name__ == "__main__":
         elif 'respectfully' in message.content:
             delay = random.randint(1, 19)
             await asyncio.sleep(delay)
-            await message.reply('respectfully.')
+            # await message.reply('respectfully.')
             await message.add_reaction('🕶')
         elif daBabyDenier is not None:
             await message.add_reaction('👎🏽')
