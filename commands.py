@@ -1,6 +1,8 @@
 import random
 import asyncio
 
+import decoder
+
 
 async def shame(argument: str) -> str:
     '''Used for shaming'''
@@ -44,3 +46,13 @@ async def combat(combatant_one: str, combatant_two: str) -> str:
     else:  # Tie
         result = 'Alas, it was a stalemate. Neither could best the other.'
     return f'{roll_string} {result}'
+
+
+async def decode(argument: str) -> str:
+    in_string = str.strip(argument[len('ddec'):])
+    return await decoder.decode(in_string)
+
+
+async def encode(argument: str) -> str:
+    in_string = str.strip(argument[len('denc'):])
+    return await decoder.encode(in_string)

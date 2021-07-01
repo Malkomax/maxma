@@ -20,7 +20,11 @@ async def command_processor(argument: str) -> str:
                    'To wish a friend a birthday, use ' +
                    '```css\nsipsvs hbd [name]```\n' +
                    'To provide additional respect, use ' +
-                   '```css\nsipsvs respectfully [text]```\n')
+                   '```css\nsipsvs respectfully [text]```\n' +
+                   'To encode or decode David\'s Cipher, use' +
+                   '```css\nsipsvs ddec [ciphertext]```\n' +
+                   'To encode or decode David\'s Cipher, use' +
+                   '```css\nsipsvs denc [ciphertext]```\n')
     if argument.startswith('shame'):
         return commands.shame(argument)
     if argument.startswith('fuck'):
@@ -38,4 +42,8 @@ async def command_processor(argument: str) -> str:
         return await commands.hap_birt(argument)
     if argument.startswith('respectfully'):
         return await commands.respectfully(argument)
+    if argument.startswith('ddec'):
+        return await commands.decode(argument)
+    if argument.startswith('denc'):
+        return await commands.encode(argument)
     return await commands.combat('sips', argument)
