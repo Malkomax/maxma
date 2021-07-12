@@ -40,7 +40,7 @@ if __name__ == "__main__":
         '''On first event, set up client'''
         await client.change_presence(activity=discord.Activity(
             type=discord.ActivityType.listening,
-            name='sipsvs, no longer decrypting'))
+            name='sipsvs, in development'))
         print(f'We have logged in as {client.user}')
 
     @client.event
