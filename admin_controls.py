@@ -1,4 +1,4 @@
-# import admin_commands as commands
+import admin_commands as commands
 
 
 async def command_processor(argument: str) -> str:
@@ -6,8 +6,11 @@ async def command_processor(argument: str) -> str:
     This function determines
     the behavior of the sipsvs bot after the sipsvs keyword.
     '''
-    return str('this is the admin input menu. ' +
-               f'Phrase `{argument}` received for admin.')
+    if len(argument) == 0 or argument == 'help':
+        return str('this is the admin input menu.')
+    if argument.startswith('bonk'):
+        return commands.bonk(argument)
+    return f'Unrecognized admin command {argument}'
     # return str('Hey, thanks for asking for help!\n\n' +
     #            'To make it clear your homies hate someone, use ' +
     #            '```css\nsipsvs fuck [name]```\n' +
