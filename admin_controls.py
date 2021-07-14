@@ -9,7 +9,7 @@ async def command_processor(argument: str) -> str:
     if len(argument) == 0 or argument == 'help':
         return str('this is the admin input menu.')
     if argument.startswith('bonk'):
-        return commands.bonk(argument)
+        return await commands.bonk(argument)
     return f'Unrecognized admin command {argument}'
     # return str('Hey, thanks for asking for help!\n\n' +
     #            'To make it clear your homies hate someone, use ' +
