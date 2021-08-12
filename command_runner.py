@@ -26,9 +26,11 @@ async def command_processor(argument: str) -> str:
 #                #    'To encode or decode David\'s Cipher, use' +
 #                #    '```css\nsipsvs denc [ciphertext]```\n')
     if argument.startswith('shame'):
-        return commands.shame(argument)
+        return await commands.shame(argument)
+    if argument.startswith('cancel'):
+        return await commands.cancel(argument)
     if argument.startswith('fuck'):
-        return commands.fuck(argument)
+        return await commands.fuck(argument)
     if argument.startswith('pvp'):
         arg = str.strip(argument[len('pvp'):])
         if 'vs' not in arg:
@@ -42,8 +44,4 @@ async def command_processor(argument: str) -> str:
         return await commands.hap_birt(argument)
     if argument.startswith('respectfully'):
         return await commands.respectfully(argument)
-#     if argument.startswith('ddec'):
-#         return await commands.decode(argument)
-#     if argument.startswith('denc'):
-#         return await commands.encode(argument)
     return await commands.combat('sips', argument)

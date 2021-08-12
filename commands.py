@@ -22,6 +22,13 @@ async def respectfully(argument: str) -> str:
     return f'{arg}. respectfully.'
 
 
+async def cancel(argument: str) -> str:
+    '''cancel someone because THAT always helps.'''
+    arg = str.strip(argument[len('cancel'):])
+    await asyncio.sleep(3)
+    return f'{arg} IS CANCELLED 🕶🕶🕶'
+
+
 async def hap_birt(argument: str) -> str:
     '''
     Sends a happy birthday message!
