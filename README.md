@@ -1,7 +1,7 @@
 # Sips vs...
 
 ## Overview
-Sips Vs is a Discord Bot designed to do stupid stuff. Inspired by a friend, `sips`, the Sips Vs bot is a slowly-developing project that we build out as the Discord server it's connected to does. 
+Sips Vs is a Discord Bot designed to do stupid stuff. Inspired by a friend, `sips`, the Sips Vs bot is a slowly-developing project that we build out as the Discord server it's connected to grows and changess. 
 
 The bot now runs Python 3.7+ and is compatibile with `asyncio`, using `await` fairly commonly. Zubair is still learning how to use the library, so it's a work in progress.
 
